@@ -1,0 +1,11 @@
+Setup instructions
+    1. Copy widget script to ~/.config/awesome dir
+    2. Add to your rc.lua this strings atop:
+       require("mpd_state")    --> for MPD State Widget
+       require("volume")       --> for Volume State Widget
+    3. Add to your container mpd_state or volume widget.
+       By default you have "mywibox" panel.
+
+Links
+    Awesome - http://awesome.naquadah.org/
+    Lua - http://lua.org/
