@@ -7,8 +7,8 @@
         fd:close()
 
 	state = string.match(status, "%[(%w+)%]")
-	artist = string.match(status, "Artist: ([%w\ ]+)")
-	title = string.match(status, "Title: ([%w\ ]+)")
+	artist = string.match(status, "Artist: ([%w\ \"']+)")
+	title = string.match(status, "Title: ([%w\ \"']+)")
 
 	if state == nil then
 	    state_str = "<b>MPD</b>: Stopped"
