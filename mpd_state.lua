@@ -7,22 +7,25 @@
 mpd_widget = widget({ type = "textbox", name = "tb_mpd", align = "right" })
 
 function update_mpd_state(widget)
-    local fd = io.popen("mpc status -f 'Title: %title%\nArtist: %artist%'")
+    local fd = io.popen("mpc -f 'Title: %title%\nArtist: %artist%'")
     local status = fd:read("*all")
     fd:close()
 
     local state = string.match(status, "%[(%w+)%]")
-    local artist = string.match(status, "Artist: ([%w\ \"']+)")
-    local title = string.match(status, "Title: ([%w\ \"']+)")
+    local artist = string.match(status, "Artist: ([%w '\"\-]+)")
+    local title = string.match(status, "Title: ([%w '\"\-]+)")
+
+    local state_str
 
     if state == nil then
-        local state_str = "<b>MPD</b>: Stopped"
+        state_str = "<b>MPD</b>: Stopped"
     elseif state == "paused" then
-        local state_str = "<b>MPD</b>: Paused"
+        state_str = "<b>MPD</b>: Paused"
     else
-        local state_str = artist .. " - " .. title
+        state_str = artist .. " - " .. title
     end
-        widget.text = state_str
+    
+    widget.text = state_str
 end
 
     update_mpd_state(mpd_widget)
